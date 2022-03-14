@@ -1,0 +1,59 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.event-card {
+  width: 1024px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.event-details {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.event-responses {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: "1200px") {
+  .event-card {
+    width: 950px;
+  }
+}
+
+@media screen and (max-width: "1024px") {
+  .event-card {
+    width: 756px;
+  }
+}
+@media screen and (max-width: "850px") {
+  .event-card {
+    width: 560px;
+  }
+}
+@media screen and (max-width: "630px") {
+  .event-card {
+    width: 450px;
+  }
+}
+@media screen and (max-width: "460px") {
+  .event-card {
+    width: 350px;
+  }
+}

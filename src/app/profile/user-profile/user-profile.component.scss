@@ -1,0 +1,133 @@
+.hero {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-card-main {
+  width: 1024px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.image-card {
+  padding: 0.125rem;
+  margin: 0.5rem;
+  position: relative;
+
+  .profile-photo {
+    width: 100%;
+    max-height: 500px;
+    border: none;
+    border-radius: 1rem;
+    object-fit: contain;
+  }
+
+  .profile-photo-input {
+    visibility: hidden;
+  }
+
+  .card-edit-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
+
+.profile-card {
+  padding: 0.125rem;
+  margin: 0.5rem;
+  position: relative;
+
+  .profile-edit-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+
+  form {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    mat-form-field {
+      width: 60%;
+    }
+  }
+}
+
+.role-card {
+  padding: 0.125rem;
+  margin: 0.5rem;
+  position: relative;
+
+  .role-edit-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+
+  form {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    mat-slide-toggle {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+@media screen and (max-width: "1200px") {
+  .hero-card-main {
+    width: 950px;
+  }
+}
+
+@media screen and (max-width: "1024px") {
+  .hero-card-main {
+    width: 756px;
+  }
+}
+@media screen and (max-width: "850px") {
+  .hero-card-main {
+    width: 560px;
+  }
+  .profile-card {
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}
+@media screen and (max-width: "630px") {
+  .hero-card-main {
+    width: 450px;
+  }
+  .profile-card {
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}
+@media screen and (max-width: "460px") {
+  .hero-card-main {
+    width: 350px;
+  }
+  .profile-card {
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.hero {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.settings-card {
+  width: 1024px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+@media screen and (max-width: "1200px") {
+  .settings-card {
+    width: 950px;
+  }
+}
+
+@media screen and (max-width: "1024px") {
+  .settings-card {
+    width: 756px;
+  }
+}
+@media screen and (max-width: "850px") {
+  .settings-card {
+    width: 560px;
+  }
+  .profile-card {
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}
+@media screen and (max-width: "630px") {
+  .settings-card {
+    width: 450px;
+  }
+  .profile-card {
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}
+@media screen and (max-width: "460px") {
+  .settings-card {
+    width: 350px;
+  }
+  .profile-card {
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}

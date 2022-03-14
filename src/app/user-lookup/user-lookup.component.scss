@@ -1,0 +1,28 @@
+.details-card {
+  padding: 0.125rem;
+  margin: 0.5rem;
+}
+
+.role-card {
+  padding: 0.125rem;
+  margin: 0.5rem;
+  position: relative;
+
+  .role-edit-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+
+  form {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    mat-slide-toggle {
+      margin: 0.5rem 0;
+    }
+  }
+}

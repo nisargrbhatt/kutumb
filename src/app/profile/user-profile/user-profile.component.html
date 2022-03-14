@@ -1,0 +1,174 @@
+<div class="hero" *ngIf="user">
+  <div class="hero-card-main mat-elevation-z2">
+    <div class="image-card">
+      <button
+        mat-icon-button
+        color="accent"
+        class="card-edit-button"
+        aria-label="Profile Photo update button"
+        (click)="profileImageBtn.click()"
+        matTooltip="Edit Image"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <img
+        [src]="photoURL"
+        [alt]="user.name"
+        aria-label="Profile Photo"
+        class="profile-photo"
+      />
+      <input
+        type="file"
+        placeholder="Profile Image"
+        (change)="updatePhoto($event)"
+        class="profile-photo-input"
+        #profileImageBtn
+      />
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profile-card">
+      <button
+        mat-icon-button
+        color="accent"
+        class="profile-edit-button"
+        aria-label="Profile Photo update button"
+        (click)="toggleEditProfile()"
+        matTooltip="Edit Profile"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <form [formGroup]="profileForm" (submit)="onProfileSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Display Name</mat-label>
+          <input
+            matInput
+            formControlName="displayName"
+            type="text"
+            placeholder="Your Display Name"
+          />
+          <mat-hint>This name will be visible as Username</mat-hint>
+          <mat-error
+            *ngIf="profileForm.get('displayName')?.hasError('required')"
+            >Required</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contact No</mat-label>
+          <span matPrefix>+91</span>
+          <input
+            matInput
+            type="tel"
+            placeholder="Your Contact No"
+            formControlName="contactNo"
+          />
+          <mat-error
+            *ngIf="
+              profileForm.get('contactNo')?.hasError('minLength') ||
+              profileForm.get('contactNo')?.hasError('maxLength')
+            "
+            >10 digits only</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input
+            matInput
+            placeholder="Your Full Name"
+            formControlName="fullName"
+            type="text"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Father's Name</mat-label>
+          <input
+            matInput
+            placeholder="Your Father's Name"
+            formControlName="fatherName"
+            type="text"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mother's Name</mat-label>
+          <input
+            matInput
+            placeholder="Your Mother's Name"
+            formControlName="motherName"
+            type="text"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Native Place</mat-label>
+          <input
+            matInput
+            placeholder="Your Native Place"
+            formControlName="nativePlace"
+            type="text"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Home address</mat-label>
+          <textarea
+            matInput
+            formControlName="homeAddress"
+            placeholder="Your home address"
+            rows="5"
+            cols="15"
+          ></textarea>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          *ngIf="editModeProfile"
+          [disabled]="profileForm.invalid || !profileForm.dirty"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="role-card" *ngIf="user.roles?.admin === true">
+      <button
+        mat-icon-button
+        color="accent"
+        class="role-edit-button"
+        aria-label="Roles update button"
+        (click)="toggleEditRole()"
+        matTooltip="Edit Roles"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <form [formGroup]="roleForm" (submit)="onRoleSubmit()">
+        <mat-slide-toggle formControlName="member" color="primary"
+          >Member</mat-slide-toggle
+        >
+        <mat-error *ngIf="roleForm.get('member')?.hasError('required')"
+          >Member role is required</mat-error
+        >
+        <mat-slide-toggle formControlName="special" color="primary"
+          >Special</mat-slide-toggle
+        >
+        <mat-slide-toggle formControlName="admin" color="primary"
+          >Admin</mat-slide-toggle
+        >
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          *ngIf="editModeRole"
+          [disabled]="roleForm.invalid || !roleForm.dirty"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

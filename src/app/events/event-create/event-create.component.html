@@ -1,0 +1,75 @@
+<div class="hero">
+  <div class="event-card mat-elevation-z2">
+    <form [formGroup]="eventForm" (submit)="onEventFormSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Event Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Event Name"
+          formControlName="name"
+        />
+        <mat-error *ngIf="eventForm.get('name')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Location</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Event Location"
+          formControlName="location"
+        />
+        <mat-error *ngIf="eventForm.get('location')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          cols="15"
+          formControlName="description"
+          placeholder="Event Description"
+        ></textarea>
+        <mat-error *ngIf="eventForm.get('description')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input
+          type="date"
+          matInput
+          formControlName="date"
+          placeholder="Event Date"
+        />
+        <mat-error *ngIf="eventForm.get('date')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Time</mat-label>
+        <input
+          type="time"
+          matInput
+          formControlName="time"
+          placeholder="Event Time"
+        />
+        <mat-error *ngIf="eventForm.get('time')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-raised-button
+        type="submit"
+        color="accent"
+        [disabled]="eventForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

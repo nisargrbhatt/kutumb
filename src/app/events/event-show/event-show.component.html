@@ -1,0 +1,56 @@
+<div class="hero">
+  <div class="event-card mat-elevation-z2">
+    <div class="event-details" *ngIf="event">
+      <h2 class="mat-display-3">{{ event.name }}</h2>
+      <h3>
+        <mat-icon color="primary" matTooltip="Event Location">place</mat-icon>:
+        {{ event.location }}
+      </h3>
+      <h3>
+        <mat-icon color="primary" matTooltip="Event Description"
+          >description</mat-icon
+        >:
+        {{ event.description }}
+      </h3>
+      <h3>
+        <mat-icon color="primary" matTooltip="Event Date">event</mat-icon>:
+        {{ event.date | date }}
+      </h3>
+      <h3>
+        <mat-icon color="primary" matTooltip="Event Time">schedule</mat-icon>:
+        {{ event.time }}
+      </h3>
+      <h3>
+        <mat-icon color="primary" matTooltip="Total Count">groups</mat-icon>:
+        {{ countUserResponse() }}
+      </h3>
+
+      <div class="event-actions">
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          matTooltip="Edit Event"
+          [routerLink]="['/event/update/', event.id]"
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          matTooltip="Delete Event"
+          (click)="deleteEvent()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="event-responses" *ngIf="event?.user_response">
+      <app-user-response-table
+        [responses]="event?.user_response"
+      ></app-user-response-table>
+    </div>
+  </div>
+</div>

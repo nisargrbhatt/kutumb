@@ -1,0 +1,30 @@
+.hero {
+  padding: 0;
+  margin: 0;
+}
+
+.banner-form {
+  padding: 0.5rem;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    mat-form-field {
+      width: 80%;
+    }
+  }
+}
+
+.banner-previews {
+  padding: 0.5rem;
+}
+
+.banner-cards {
+  max-width: 450px;
+  margin: 0.25rem;
+}
+.banner-image-preview {
+  max-width: 400px;
+  max-height: 400px;
+}

@@ -1,0 +1,94 @@
+<div class="hero">
+  <div class="hero-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      matTooltip="Create New Event"
+      *ngIf="user && user?.roles?.special === true"
+      [routerLink]="['/event/create']"
+    >
+      Create <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="event-card" *ngIf="eventService.events$ | async as events">
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let event of events">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ event.name }}</mat-panel-title>
+          <mat-panel-description>
+            <mat-chip-list ariaOrientation="horizontal">
+              <mat-chip
+                color="primary"
+                *ngIf="checkUpcoming(event.date)"
+                [selectable]="false"
+                [selected]="true"
+              >
+                Upcoming 🎉
+              </mat-chip>
+            </mat-chip-list>
+            <mat-chip-list ariaOrientation="horizontal">
+              <mat-chip
+                color="accent"
+                *ngIf="checkUserResponed(event); else notResponded"
+                [selectable]="false"
+                [selected]="true"
+                >Responded</mat-chip
+              >
+              <ng-template #notResponded>
+                <mat-chip color="warn" [selectable]="false" [selected]="true"
+                  >Not Responded</mat-chip
+                >
+              </ng-template>
+            </mat-chip-list>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-icon matTooltip="Event Location">place</mat-icon>:
+          {{ event.location }}
+        </p>
+        <p>
+          <mat-icon matTooltip="Event Description">description</mat-icon>:
+          {{ event.description }}
+        </p>
+        <p>
+          <mat-icon matTooltip="Event Date">event</mat-icon>:
+          {{ event.date | date }}
+        </p>
+        <p>
+          <mat-icon matTooltip="Event Time">schedule</mat-icon>:
+          {{ event.time }}
+        </p>
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['/event/', event.id]"
+            *ngIf="user && user?.roles?.special === true"
+            matTooltip="Open"
+          >
+            <mat-icon>open_in_full</mat-icon>
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            *ngIf="!checkUserResponed(event) && user"
+            matTooltip="Your Event Response"
+            (click)="addRSVP(event)"
+          >
+            <mat-icon>rsvp</mat-icon>
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            *ngIf="checkUserResponed(event) && user"
+            matTooltip="Cancel your RSVP"
+            (click)="cancelRSVP(event)"
+          >
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Hi {{ data.name }}</h1>
+
+<div mat-dialog-content>
+  <p>RSVP for {{ data.eventName }}</p>
+
+  <form [formGroup]="responseForm" (submit)="onResponseFormSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>How many?</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="count"
+        placeholder="How many will you come?"
+        min="0"
+        max="100"
+      />
+      <mat-error *ngIf="responseForm.get('count')?.hasError('min')"
+        >Minimum value is 0</mat-error
+      >
+      <mat-hint>If you does not want to come. Add '0'</mat-hint>
+    </mat-form-field>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="responseForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button color="warn" [matDialogClose]="false">No Thanks</button>
+</div>

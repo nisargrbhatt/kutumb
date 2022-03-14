@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kutumb-bed35": {
+      "hosting": {
+        "kutumb": [
+          "kutumb-bed35"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kutumb-bed35"
+  }
+}
