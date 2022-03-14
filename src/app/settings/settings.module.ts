@@ -5,13 +5,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingComponent } from './setting/setting.component';
 import { SettingBannerComponent } from './setting-banner/setting-banner.component';
 import { SettingUserComponent } from './setting-user/setting-user.component';
+import { SettingsRoutingModule } from './settings-routing.module';
 
 @NgModule({
   declarations: [
     SettingComponent,
     SettingBannerComponent,
-    SettingUserComponent
+    SettingUserComponent,
   ],
-  imports: [CommonModule, AngularMaterialModule, NgbModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    NgbModule,
+    SettingsRoutingModule,
+  ],
 })
 export class SettingsModule {}

@@ -8,6 +8,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { RouterModule } from '@angular/router';
 import { RsvpDialogComponent } from './rsvp-dialog/rsvp-dialog.component';
 import { UserResponseTableComponent } from './user-response-table/user-response-table.component';
+import { EventsRoutingModule } from './events-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,13 @@ import { UserResponseTableComponent } from './user-response-table/user-response-
     RsvpDialogComponent,
     UserResponseTableComponent,
   ],
-  imports: [CommonModule, AngularMaterialModule, NgbModule, RouterModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    NgbModule,
+    RouterModule,
+    EventsRoutingModule,
+  ],
   providers: [DatePipe],
 })
 export class EventsModule {}
