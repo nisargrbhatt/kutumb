@@ -1,15 +1,11 @@
 import { AuthService } from 'src/app/core/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  doc,
-  Firestore,
-  setDoc,
-  updateDoc,
-  DocumentReference,
-} from '@angular/fire/firestore';
+import { DocumentReference, setDoc } from '@angular/fire/firestore';
 import { finalize, map, Observable, of } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Roles, User } from 'src/app/interfaces/user';
+import { SubSink } from 'subsink';
 
 import {
   Storage,
@@ -18,8 +14,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from '@angular/fire/storage';
-import { SubSink } from 'subsink';
-import { Roles, User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-user-profile',

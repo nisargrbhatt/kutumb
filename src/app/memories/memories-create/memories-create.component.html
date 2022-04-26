@@ -1,0 +1,72 @@
+<div class="hero">
+  <div class="memory-card mat-elevation-z2">
+    <div class="memory-images">
+      <div class="memory-image-previews">
+        {{ photos }}
+        <img [src]="photo" alt="Memory Image" *ngFor="let photo of photos" />
+      </div>
+      <div class="memory-image-input">
+        <input
+          class="m-image-input"
+          type="file"
+          name="image"
+          id="image"
+          style="display: none"
+          (change)="uploadPhoto($event)"
+          #imageInput
+        />
+        <mat-progress-bar
+          mode="determinate"
+          *ngIf="uploadStarted"
+          [value]="uploadPercentage | async"
+        ></mat-progress-bar>
+        <button mat-raised-button color="accent" (click)="imageInput.click()">
+          <mat-icon>attach_file</mat-icon> Images
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <form (submit)="onMemoryFormSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          rows="10"
+          cols="40"
+          placeholder="Memory description"
+          [formControl]="description"
+        ></textarea>
+        <mat-error *ngIf="description.hasError('required')"
+          >Description is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Tags">
+          <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="Add tags..."
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+          <mat-hint>Separate the tag with ENTER / COMMA</mat-hint>
+        </mat-chip-list>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="description.invalid || photos.length < 1"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div appScrollable class="hero" (scrollPosition)="scrollHandler($event)">
+  <div *ngFor="let memory of memories" class="memory-card mat-elevation-z2">
+    <ngb-carousel *ngIf="memory.photos">
+      <ng-template ngbSlide *ngFor="let photo of memory.photos">
+        <div class="memory-img-wrapper">
+          <img [src]="photo" alt="Memory Photo" />
+        </div>
+      </ng-template>
+    </ngb-carousel>
+    <mat-chip-list aria-label="Memory Tags" *ngIf="memory.tags?.length">
+      <mat-chip
+        *ngFor="let tag of memory.tags"
+        selectable="false"
+        selected
+        color="accent"
+        >{{ tag }}</mat-chip
+      >
+    </mat-chip-list>
+    <h2>{{ memory.description }}</h2>
+    <mat-divider></mat-divider>
+    <div class="memory-card-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="!memory.likes.includes(user.uid); else noLike"
+        matTooltip="Like"
+        (click)="addLike(memory.doc.id)"
+      >
+        <mat-icon>favorite</mat-icon> Like
+      </button>
+      <ng-template #noLike>
+        <button
+          mat-raised-button
+          color="primary"
+          matTooltip="Remove Like"
+          (click)="removeLike(memory.doc.id)"
+        >
+          <mat-icon color="warn">favorite</mat-icon> Liked
+        </button>
+      </ng-template>
+      <button
+        mat-raised-button
+        color="warn"
+        *ngIf="memory.createdBy === user.uid"
+        (click)="deleteMemory(memory.doc.id)"
+      >
+        <mat-icon>delete</mat-icon> Delete
+      </button>
+    </div>
+
+    <mat-accordion #accordian class="memory-card-comments">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Comment</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="memory-comments" *ngFor="let comment of memory.comments">
+          <p>{{ comment.message }}</p>
+          <p>{{ comment.createdAt | date }}</p>
+          <button
+            mat-icon-button
+            color="warn"
+            *ngIf="comment.userId === user.uid"
+            (click)="removeComment(comment, memory.doc.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <input
+            #commentInput
+            type="text"
+            name="comment"
+            matInput
+            placeholder="Write a comment"
+            [formControl]="commentFormControl"
+          />
+          <span matSuffix (click)="addComment(memory.doc.id)">
+            <mat-icon>send</mat-icon>
+          </span>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <p *ngIf="page.done | async">I ran out of memories!</p>
+  <mat-spinner *ngIf="page.loading | async"></mat-spinner>
+</div>

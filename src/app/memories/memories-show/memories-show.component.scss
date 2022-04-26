@@ -1,0 +1,93 @@
+.hero {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.memory-card {
+  width: 1024px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  mat-chip-list {
+    margin: 0.5rem;
+  }
+}
+
+.memory-card-comments {
+  margin: 0.5rem;
+  width: 100%;
+  .memory-comments {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.memory-img-wrapper {
+  img {
+    max-height: 300px !important;
+  }
+}
+
+.memory-card-actions {
+  display: flex;
+  button {
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (max-width: "1200px") {
+  .memory-card {
+    width: 950px;
+  }
+}
+
+@media screen and (max-width: "1024px") {
+  .memory-card {
+    width: 756px;
+  }
+}
+@media screen and (max-width: "850px") {
+  .memory-card {
+    width: 560px;
+  }
+}
+@media screen and (max-width: "630px") {
+  .memory-card {
+    width: 450px;
+  }
+  .memory-img-wrapper {
+    img {
+      max-width: 450px !important;
+    }
+  }
+}
+@media screen and (max-width: "460px") {
+  .memory-card {
+    width: 350px;
+  }
+  .memory-img-wrapper {
+    img {
+      max-width: 300px !important;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+.hero {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.memory-card {
+  width: 1024px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+
+  form {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    mat-form-field {
+      width: 60%;
+    }
+  }
+}
+
+.memory-images {
+  .memory-image-previews {
+    display: flex;
+    overflow-x: auto;
+
+    img {
+      max-height: 200px;
+      margin: 1rem;
+    }
+  }
+
+  .memory-image-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (max-width: "1200px") {
+  .memory-card {
+    width: 950px;
+  }
+}
+
+@media screen and (max-width: "1024px") {
+  .memory-card {
+    width: 756px;
+  }
+}
+@media screen and (max-width: "850px") {
+  .memory-card {
+    width: 560px;
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}
+@media screen and (max-width: "630px") {
+  .memory-card {
+    width: 450px;
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}
+@media screen and (max-width: "460px") {
+  .memory-card {
+    width: 350px;
+    form {
+      mat-form-field {
+        width: 80%;
+      }
+    }
+  }
+}

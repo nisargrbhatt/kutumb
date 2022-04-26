@@ -25,9 +25,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { SettingsModule } from './settings/settings.module';
 import { EventsModule } from './events/events.module';
 import { UserLookupComponent } from './user-lookup/user-lookup.component';
+import { SpinnerComponent } from './help-components/spinner/spinner.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLookupComponent],
+  declarations: [AppComponent, UserLookupComponent, SpinnerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

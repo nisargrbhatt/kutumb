@@ -26,7 +26,6 @@ export class EventListComponent implements OnInit, OnDestroy {
   ) {
     this.subs.sink = this.auth.user.subscribe((user) => {
       this.user = user;
-      console.log(this.user);
     });
   }
 

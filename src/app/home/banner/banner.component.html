@@ -7,7 +7,7 @@
     [showNavigationIndicators]="true"
   >
     <ng-template ngbSlide *ngFor="let image of images">
-      <div class="picsum-img-wrapper">
+      <div class="banner-img-wrapper">
         <img
           [src]="image.bannerImageURL"
           alt="Random first slide"
@@ -22,7 +22,12 @@
   </ngb-carousel>
 </div>
 <div class="share-btn">
-  <button mat-raised-button color="accent" type="button">
+  <button
+    mat-raised-button
+    color="accent"
+    type="button"
+    routerLink="/memories/create"
+  >
     Share your memories
   </button>
 </div>

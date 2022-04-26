@@ -9,7 +9,6 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
 import { SubSink } from 'subsink';
 import { AuthService } from '../core/auth.service';
 import { User } from '../interfaces/user';

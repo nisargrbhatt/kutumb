@@ -49,12 +49,12 @@ export class EventCreateComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       }),
     });
+    this.subs.sink = this.auth.user.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => {
-      this.user = user;
-    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.editMode = true;
