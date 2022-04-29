@@ -6,14 +6,14 @@ export interface Roles {
 
 export interface User {
   uid: string;
-  email: string | null;
-  photoURL?: string | null;
-  displayName?: string | null;
+  email?: string;
+  photoURL?: string;
+  displayName: string;
   roles?: Roles;
-  contactNo?: string | null;
-  fullName?: string | null;
-  fatherName?: string | null;
-  motherName?: string | null;
-  nativePlace?: string | null;
-  homeAddress?: string | null;
+  contactNo?: string;
+  fullName?: string;
+  fatherName?: string;
+  motherName?: string;
+  nativePlace?: string;
+  homeAddress?: string;
 }

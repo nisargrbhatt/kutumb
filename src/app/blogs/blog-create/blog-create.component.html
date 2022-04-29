@@ -1,0 +1,68 @@
+<div class="hero">
+  <div class="blog-card mat-elevation-z2">
+    <form [formGroup]="blogForm" (submit)="onBlogFormSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="Blog Title"
+        />
+        <mat-error *ngIf="blogForm.get('title')?.hasError('required')"
+          >Title is required</mat-error
+        >
+        <mat-hint>Title cannot be changed afterward, choose wisely</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Summary</mat-label>
+        <textarea
+          matInput
+          rows="10"
+          cols="10"
+          formControlName="summary"
+          placeholder="Summary of the blog"
+        ></textarea>
+        <mat-error *ngIf="blogForm.get('summary')?.hasError('required')"
+          >Summary is required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Tags" required>
+          <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="Add tags..."
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+          <mat-hint>Separate the tag with ENTER / COMMA</mat-hint>
+        </mat-chip-list>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="published">Publish</mat-slide-toggle>
+      <mat-hint>You want to publish it directly.</mat-hint>
+
+      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+      <ngx-editor [editor]="editor" formControlName="content"></ngx-editor>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="blogForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

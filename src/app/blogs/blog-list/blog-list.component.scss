@@ -1,0 +1,67 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.blog-card {
+  width: 1024px;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .blogmatcard {
+    margin: 1rem;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: "1200px") {
+  .blog-card {
+    width: 950px;
+  }
+}
+
+@media screen and (max-width: "1024px") {
+  .blog-card {
+    width: 756px;
+  }
+}
+@media screen and (max-width: "850px") {
+  .blog-card {
+    width: 560px;
+
+    .blogmatcard {
+      width: 80%;
+    }
+  }
+}
+@media screen and (max-width: "630px") {
+  .blog-card {
+    width: 450px;
+
+    .blogmatcard {
+      width: 80%;
+    }
+  }
+}
+@media screen and (max-width: "460px") {
+  .blog-card {
+    width: 350px;
+
+    .blogmatcard {
+      width: 80%;
+    }
+  }
+}

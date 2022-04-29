@@ -1,0 +1,114 @@
+<div class="hero">
+  <div class="blog-card mat-elevation-z2" *ngIf="blog && user?.uid">
+    <article
+      aria-label="Blog Content"
+      [innerHtml]="blog.content"
+      class="blog-content"
+    ></article>
+    <mat-divider></mat-divider>
+    <div class="blog-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        matTooltip="Like the Blog"
+        (click)="addLike()"
+        *ngIf="!checkLike()"
+      >
+        <mat-icon>favorite</mat-icon> Like
+        {{ checkAuthor() ? blog.likes.length : null }}
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        matTooltip="Unlike the Blog"
+        (click)="deleteLike()"
+        *ngIf="checkLike()"
+      >
+        <mat-icon color="warn">favorite</mat-icon> Liked
+        {{ checkAuthor() ? blog.likes.length : null }}
+      </button>
+
+      <button
+        mat-raised-button
+        color="accent"
+        *ngIf="checkAuthor()"
+        matTooltip="Update the Blog"
+        [routerLink]="['/blog/update/', blog.id]"
+      >
+        <mat-icon>edit</mat-icon> Edit
+      </button>
+
+      <button
+        mat-raised-button
+        color="warn"
+        *ngIf="checkAuthor()"
+        matTooltip="Delete the Blog"
+        (click)="deleteBlog()"
+      >
+        <mat-icon>delete</mat-icon> Delete
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="blog.published === false && checkAuthor()"
+        matTooltip="Publish the blog"
+        (click)="publishBlog()"
+      >
+        <mat-icon>publish</mat-icon> Publish
+      </button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="blog-comments">
+      <h2>Comments</h2>
+      <div class="comments-section">
+        <mat-card class="comment-card" *ngFor="let comment of blog.comments">
+          <mat-card-header>
+            <div
+              mat-card-avatar
+              aria-label="Comment User Image"
+              class="commentcard-header-image"
+              [ngStyle]="{
+                'background-image': 'url(' + comment.user?.photoURL + ')'
+              }"
+            ></div>
+            <mat-card-title aria-label="Comment User Name">{{
+              comment.user.displayName
+            }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ comment.message }}</p>
+          </mat-card-content>
+          <mat-card-actions *ngIf="checkUser(comment.user.userId)">
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="deleteComment(comment)"
+            >
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </mat-card-actions>
+          <mat-card-footer>
+            {{ comment.createdAt | date }}
+          </mat-card-footer>
+        </mat-card>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <input
+          matInput
+          type="text"
+          [formControl]="commentFormControl"
+          placeholder="Write your comment"
+        />
+        <span matSuffix (click)="addComment()">
+          <mat-icon> send </mat-icon>
+        </span>
+      </mat-form-field>
+      <p *ngIf="blog.comments.length === 0">No comments added</p>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./memories/memories.module').then((m) => m.MemoriesModule),
   },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./blogs/blogs.module').then((m) => m.BlogsModule),
+  },
 ];
 
 @NgModule({

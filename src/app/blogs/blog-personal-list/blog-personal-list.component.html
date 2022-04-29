@@ -1,0 +1,43 @@
+<div class="hero">
+  <div class="blog-card mat-elevation-z2">
+    <mat-card class="blogmatcard" *ngFor="let blog of blogs">
+      <mat-card-header>
+        <div
+          mat-card-avatar
+          aria-label="Blog Author Image"
+          class="blogmatcard-header-image"
+          [ngStyle]="{
+            'background-image': 'url(' + blog.author?.photoURL + ')'
+          }"
+        ></div>
+        <mat-card-title aria-label="Blog Title">{{
+          blog.title | titlecase
+        }}</mat-card-title>
+        <mat-card-subtitle aria-label="Blog Author Name">{{
+          blog.author.displayName
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-list aria-label="Blog Tags" *ngIf="blog.tags?.length">
+          <mat-chip
+            *ngFor="let tag of blog.tags"
+            selectable="false"
+            selected
+            color="accent"
+            >{{ tag }}</mat-chip
+          >
+        </mat-chip-list>
+        <p>{{ blog.summary }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/blog/', blog.slug]"
+        >
+          <mat-icon>open_in_full</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

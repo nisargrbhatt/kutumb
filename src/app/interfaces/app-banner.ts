@@ -1,7 +1,7 @@
 export interface AppBanner {
-  id?: string | null;
+  id?: string;
   bannerImageURL: string;
   title: string;
-  subTitle?: string | null;
-  createdAt?: string | null;
+  subTitle?: string;
+  createdAt?: string;
 }
