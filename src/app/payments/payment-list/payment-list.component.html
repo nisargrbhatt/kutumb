@@ -1,0 +1,86 @@
+<mat-toolbar color="primary">
+  <button mat-raised-button color="accent" routerLink="create">
+    <mat-icon>add</mat-icon> Create
+  </button>
+</mat-toolbar>
+<div class="hero">
+  <div class="payment-card mat-elevation-z2">
+    <mat-grid-list
+      [cols]="cols"
+      rowHeight="550px"
+      *ngIf="payments"
+      gutterSize="10px"
+    >
+      <mat-grid-tile *ngFor="let payment of payments">
+        <mat-card class="payment-detail-card">
+          <mat-card-header>
+            <mat-card-title>{{ payment.title | uppercase }}</mat-card-title>
+          </mat-card-header>
+          <img
+            class="banner-image"
+            mat-card-image
+            [src]="payment.image"
+            alt="Payment Banner"
+          />
+          <mat-card-content>
+            <p>{{ payment.description }}</p>
+            <p>Amount: {{ payment?.amount | currency: "INR" }}</p>
+            <mat-divider></mat-divider>
+            <div *ngIf="payment.mode === 'UPI' && payment.upi as upiData">
+              <img
+                class="upi-image"
+                [src]="upiData.qrCodeImage"
+                alt="QRCode of UPI"
+              />
+              <p>{{ upiData.upiId }}</p>
+            </div>
+            <div *ngIf="payment.mode === 'BANK' && payment.bank as bankData">
+              <p>Bank Name: {{ bankData.bankName }}</p>
+              <p>Branch Name: {{ bankData.branchName }}</p>
+              <p>IFSC: {{ bankData.IFSC }}</p>
+              <p>Account Number: {{ bankData.accountNumber }}</p>
+              <p>Holder Name: {{ bankData.holderName }}</p>
+            </div>
+            <div *ngIf="payment.mode === 'PAGE' && payment.page as pageData">
+              <p>Provider Name: {{ pageData.providerName }}</p>
+              <a [href]="pageData.url" alt="Payment Page URL" mat-button
+                >Page Link</a
+              >
+            </div>
+          </mat-card-content>
+          <mat-card-actions
+            *ngIf="user?.roles?.admin === true || user?.roles?.special === true"
+          >
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="['update/', payment.id]"
+              matTooltip="Update"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="toggleActive(!payment.active, payment?.id)"
+              [matTooltip]="payment.active ? 'Deactivate' : 'Activate'"
+            >
+              <mat-icon>{{
+                payment.active ? "toggle_on" : "toggle_off"
+              }}</mat-icon>
+            </button>
+
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="deletePayment(payment?.id)"
+              matTooltip="Delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

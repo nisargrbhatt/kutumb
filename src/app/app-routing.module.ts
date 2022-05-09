@@ -4,6 +4,7 @@ import { AuthGuard } from '@angular/fire/auth-guard';
 import { BannerComponent } from './home/banner/banner.component';
 import { AdminGuard } from './core/admin.guard';
 import { SpecialGuard } from './core/special.guard';
+import { Error404Component } from './error404/error404.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,15 @@ const routes: Routes = [
     path: 'blog',
     loadChildren: () =>
       import('./blogs/blogs.module').then((m) => m.BlogsModule),
+  },
+  {
+    path: 'payments',
+    loadChildren: () =>
+      import('./payments/payments.module').then((m) => m.PaymentsModule),
+  },
+  {
+    path: '**',
+    component: Error404Component,
   },
 ];
 

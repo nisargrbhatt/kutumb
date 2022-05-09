@@ -1,3 +1,8 @@
+<mat-toolbar color="primary">
+  <button mat-raised-button color="accent" routerLink="/memories/create">
+    <mat-icon>add</mat-icon> Create
+  </button>
+</mat-toolbar>
 <div appScrollable class="hero" (scrollPosition)="scrollHandler($event)">
   <div *ngFor="let memory of memories" class="memory-card mat-elevation-z2">
     <ngb-carousel *ngIf="memory.photos">

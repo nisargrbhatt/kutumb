@@ -26,9 +26,10 @@ import { SettingsModule } from './settings/settings.module';
 import { EventsModule } from './events/events.module';
 import { UserLookupComponent } from './user-lookup/user-lookup.component';
 import { SpinnerComponent } from './help-components/spinner/spinner.component';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLookupComponent, SpinnerComponent],
+  declarations: [AppComponent, UserLookupComponent, SpinnerComponent, Error404Component],
   imports: [
     BrowserModule,
     AppRoutingModule,

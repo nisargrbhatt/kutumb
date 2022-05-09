@@ -1,0 +1,251 @@
+<div class="hero">
+  <div class="payment-card mat-elevation-z2">
+    <mat-progress-bar
+      mode="determinate"
+      *ngIf="uploadStarted"
+      [value]="uploadPercentage | async"
+    ></mat-progress-bar>
+
+    <section class="payment-sec">
+      <div class="payment-images">
+        <div class="payment-image-preview">
+          <img
+            [src]="paymentImage"
+            alt="Payment Banner Image"
+            *ngIf="paymentImage"
+          />
+        </div>
+        <div class="payment-image-input">
+          <input
+            class="p-image-input"
+            type="file"
+            name="image"
+            id="image"
+            style="display: none"
+            (change)="uploadPaymentImage($event)"
+            #imageInput
+            accept="image/png, image/jpeg"
+          />
+
+          <button mat-raised-button color="accent" (click)="imageInput.click()">
+            <mat-icon>attach_file</mat-icon> Payment Banner
+          </button>
+        </div>
+      </div>
+
+      <form [formGroup]="paymentForm" (submit)="onPaymentFormSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Payment Title"
+            formControlName="title"
+          />
+          <mat-error *ngIf="paymentForm.get('title')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            rows="5"
+            cols="15"
+            formControlName="description"
+            placeholder="Payment Description"
+          ></textarea>
+          <mat-error
+            *ngIf="paymentForm.get('description')?.hasError('required')"
+          >
+            Required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="active">Active</mat-slide-toggle>
+        <mat-hint>If you want to accept the payment from users</mat-hint>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Payment Amount"
+            formControlName="amount"
+          />
+          <mat-error *ngIf="paymentForm.get('amount')?.hasError('pattern')">
+            Digits only
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mode</mat-label>
+          <mat-select formControlName="mode">
+            <mat-option value="UPI">UPI</mat-option>
+            <mat-option value="BANK">BANK</mat-option>
+            <mat-option value="PAGE">PAGE</mat-option>
+          </mat-select>
+          <mat-error *ngIf="paymentForm.get('mode')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!formCheck()"
+        >
+          Submit
+        </button>
+      </form>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="upi-sec" *ngIf="paymentModeSelect === 'UPI'">
+      <div class="upi-images">
+        <div class="upi-image-preview">
+          <img
+            [src]="upiQRCodeImage"
+            alt="UPI QRCode Image"
+            *ngIf="upiQRCodeImage"
+          />
+        </div>
+        <div class="upi-image-input">
+          <input
+            class="p-image-input"
+            type="file"
+            name="image"
+            id="image"
+            style="display: none"
+            (change)="uploadUpiImage($event)"
+            #imageInput
+            accept="image/png, image/jpeg"
+          />
+
+          <button mat-raised-button color="accent" (click)="imageInput.click()">
+            <mat-icon>attach_file</mat-icon> QR Code
+          </button>
+        </div>
+      </div>
+
+      <form [formGroup]="upiForm">
+        <mat-form-field appearance="outline">
+          <mat-label>UPI Id</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="UPI Id"
+            formControlName="upiId"
+          />
+          <mat-error *ngIf="upiForm.get('upiId')?.hasError('required')"
+            >Required</mat-error
+          >
+          <mat-error *ngIf="upiForm.get('upiId')?.hasError('pattern')"
+            >Not in pattern (id@providername)</mat-error
+          >
+        </mat-form-field>
+      </form>
+    </section>
+
+    <section class="page-sec" *ngIf="paymentModeSelect === 'PAGE'">
+      <form [formGroup]="pageForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Provider Name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Provider Name"
+            formControlName="providerName"
+          />
+          <mat-error *ngIf="pageForm.get('providerName')?.hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>URL</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="url"
+            placeholder="URL of the Payment page"
+          />
+          <mat-error *ngIf="pageForm.get('url')?.hasError('required')">
+            Required
+          </mat-error>
+          <mat-error *ngIf="pageForm.get('url')?.hasError('pattern')">
+            Not a URL
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </section>
+
+    <section class="bank-sec" *ngIf="paymentModeSelect === 'BANK'">
+      <form [formGroup]="bankForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Bank Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="bankName"
+            placeholder="Bank Name"
+          />
+          <mat-error *ngIf="bankForm.get('bankName')?.hasError('required')"
+            >Required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Branch Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="branchName"
+            placeholder="Branch Name"
+          />
+          <mat-error *ngIf="bankForm.get('branchName')?.hasError('required')"
+            >Required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>IFSC</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="IFSC"
+            placeholder="IFSC"
+          />
+          <mat-error *ngIf="bankForm.get('IFSC')?.hasError('required')"
+            >Required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Account Number</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="accountNumber"
+            placeholder="Account Number"
+          />
+          <mat-error *ngIf="bankForm.get('accountNumber')?.hasError('required')"
+            >Required</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Holder Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="holderName"
+            placeholder="Holder Name"
+          />
+          <mat-error *ngIf="bankForm.get('holderName')?.hasError('required')"
+            >Required</mat-error
+          >
+        </mat-form-field>
+      </form>
+    </section>
+  </div>
+</div>

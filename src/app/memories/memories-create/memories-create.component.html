@@ -2,7 +2,6 @@
   <div class="memory-card mat-elevation-z2">
     <div class="memory-images">
       <div class="memory-image-previews">
-        {{ photos }}
         <img [src]="photo" alt="Memory Image" *ngFor="let photo of photos" />
       </div>
       <div class="memory-image-input">

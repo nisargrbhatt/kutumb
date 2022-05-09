@@ -55,7 +55,7 @@ export class EventCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+    this.subs.sink = this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.editMode = true;
         this.eventId = paramMap.get('id');
