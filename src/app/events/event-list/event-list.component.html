@@ -1,16 +1,15 @@
+<mat-toolbar color="primary">
+  <button
+    mat-raised-button
+    color="accent"
+    matTooltip="Create New Event"
+    *ngIf="user && user?.roles?.special === true"
+    [routerLink]="['/event/create']"
+  >
+    Create <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
 <div class="hero">
-  <div class="hero-actions">
-    <button
-      mat-raised-button
-      color="primary"
-      matTooltip="Create New Event"
-      *ngIf="user && user?.roles?.special === true"
-      [routerLink]="['/event/create']"
-    >
-      Create <mat-icon>add</mat-icon>
-    </button>
-  </div>
-
   <div class="event-card" *ngIf="eventService.events$ | async as events">
     <mat-accordion multi>
       <mat-expansion-panel *ngFor="let event of events">
