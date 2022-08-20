@@ -1,26 +1,16 @@
 <h1 class="mat-display-3" style="text-align: center">Kutumb App</h1>
 
-<div class="highlight-carousel">
-  <ngb-carousel
-    *ngIf="appBannerData$ | async as images"
-    [showNavigationArrows]="true"
-    [showNavigationIndicators]="true"
-  >
-    <ng-template ngbSlide *ngFor="let image of images">
-      <div class="banner-img-wrapper">
-        <img
-          [src]="image.bannerImageURL"
-          alt="Random first slide"
-          class="carousel-image"
-        />
-      </div>
-      <div class="carousel-caption">
-        <h3>{{ image.title }}</h3>
-        <p>{{ image.subTitle }}</p>
-      </div>
-    </ng-template>
-  </ngb-carousel>
-</div>
+<ngx-slick-carousel
+  class="carousel"
+  #slickModal="slick-carousel"
+  [config]="slideConfig"
+  *ngIf="appBannerData$ | async as images"
+>
+  <div ngxSlickItem *ngFor="let image of images" class="slide">
+    <img [src]="image.bannerImageURL" [alt]="image.title" width="100%" />
+  </div>
+</ngx-slick-carousel>
+
 <div class="share-btn">
   <button
     mat-raised-button

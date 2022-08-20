@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {
   Firestore,
@@ -17,6 +17,13 @@ import { AppBanner } from 'src/app/interfaces/app-banner';
 export class BannerComponent {
   appBannerCollectionRef: CollectionReference<AppBanner | any>;
   appBannerData$: Observable<AppBanner[]>;
+  slideConfig = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: true,
+    autoplay: true,
+    pauseOnHover: true,
+  };
 
   constructor(private afs: Firestore) {
     this.appBannerCollectionRef = collection(this.afs, `app_banner`);
