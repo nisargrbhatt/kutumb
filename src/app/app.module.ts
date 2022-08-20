@@ -29,7 +29,12 @@ import { SpinnerComponent } from './help-components/spinner/spinner.component';
 import { Error404Component } from './error404/error404.component';
 
 @NgModule({
-  declarations: [AppComponent, UserLookupComponent, SpinnerComponent, Error404Component],
+  declarations: [
+    AppComponent,
+    UserLookupComponent,
+    SpinnerComponent,
+    Error404Component,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

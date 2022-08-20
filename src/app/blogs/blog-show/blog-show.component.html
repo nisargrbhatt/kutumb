@@ -72,7 +72,9 @@
               aria-label="Comment User Image"
               class="commentcard-header-image"
               [ngStyle]="{
-                'background-image': 'url(' + comment.user?.photoURL + ')'
+                'background-image': 'url(' + comment.user?.photoURL + ')',
+                'background-position': 'top center',
+                'background-repeat': 'no-repeat'
               }"
             ></div>
             <mat-card-title aria-label="Comment User Name">{{

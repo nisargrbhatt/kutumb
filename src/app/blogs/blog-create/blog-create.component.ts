@@ -11,7 +11,11 @@ import { SubSink } from 'subsink';
 import { BlogsService } from '../blogs.service';
 import slugify from 'slugify';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Editor, Toolbar } from 'ngx-editor';
+// @ts-ignore
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular';
+// @ts-ignore
+// import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 
 @Component({
   selector: 'app-blog-create',
@@ -32,17 +36,36 @@ export class BlogCreateComponent implements OnInit, OnDestroy {
   tags = new Set<string>([]);
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  editor: Editor;
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['underline', 'strike'],
-    ['code', 'blockquote'],
-    ['ordered_list', 'bullet_list'],
-    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-    ['link', 'image'],
-    ['text_color', 'background_color'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
-  ];
+  public Editor = ClassicEditor;
+  config = {
+    language: 'en',
+    toolbar: {
+      items: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+
+        '|',
+        'link',
+        '|',
+        'bulletedList',
+        'numberedList',
+        '-', // break point
+        'insertTable',
+        '|',
+        'outdent',
+        'indent',
+        '|',
+        'uploadImage',
+        'blockQuote',
+        '|',
+        'undo',
+        'redo',
+      ],
+      shouldNotGroupWhenFull: true,
+    },
+  };
 
   constructor(
     private router: Router,
@@ -65,8 +88,6 @@ export class BlogCreateComponent implements OnInit, OnDestroy {
         validators: [],
       }),
     });
-
-    this.editor = new Editor();
 
     this.subs.sink = this.auth.user.subscribe((user) => {
       this.user = user;
@@ -191,6 +212,5 @@ export class BlogCreateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
-    this.editor.destroy();
   }
 }

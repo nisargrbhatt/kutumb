@@ -52,8 +52,11 @@
       <mat-slide-toggle formControlName="published">Publish</mat-slide-toggle>
       <mat-hint>You want to publish it directly.</mat-hint>
 
-      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
-      <ngx-editor [editor]="editor" formControlName="content"></ngx-editor>
+      <ckeditor
+        [editor]="Editor"
+        [config]="config"
+        formControlName="content"
+      ></ckeditor>
 
       <button
         type="submit"

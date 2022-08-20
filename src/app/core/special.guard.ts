@@ -19,10 +19,10 @@ export class SpecialGuard implements CanActivate {
   ): Observable<boolean> {
     return this.auth.user.pipe(
       take(1),
-      map((user) => (user && user.roles?.special ? true : false)),
+      map((user) => user && user.roles?.special),
       tap((isAdmin) => {
         if (!isAdmin) {
-          console.error('Access denied - Admins only');
+          console.error('Access denied - Specials only');
         }
       })
     );
