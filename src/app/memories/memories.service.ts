@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { startAfter } from '@angular/fire/database';
 import {
   Firestore,
   CollectionReference,
@@ -11,8 +12,10 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  query,
+  limit,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Memory, MemoryComment } from '../interfaces/memory';
 
 @Injectable({
@@ -21,6 +24,9 @@ import { Memory, MemoryComment } from '../interfaces/memory';
 export class MemoriesService {
   memories$: Observable<Memory[]>;
   memoriesCollectionRef: CollectionReference<Memory | any>;
+
+  scrollMemories$: Subject<Memory[]> = new Subject<Memory[]>();
+  scrollLength: BehaviorSubject<number> = new BehaviorSubject<number>(3);
 
   constructor(private afs: Firestore) {
     this.memoriesCollectionRef = collection(this.afs, `memories`);
@@ -59,5 +65,12 @@ export class MemoriesService {
     return updateDoc(doc(this.afs, `memories/${id}`), {
       likes: arrayRemove(userId),
     });
+  }
+
+  getMemories() {
+    const memoryQuery = query(
+      this.memoriesCollectionRef,
+      limit(this.scrollLength.getValue())
+    );
   }
 }
